@@ -1,0 +1,24 @@
+Exercise 4.1
+
+1. Define in your own words the terms constraint satisfaction problem, constraint, back-tracking search, back-jumping, and min-conflicts.
+
+Constraint satisfaction problem and constraint:  A constraint is a limit on the possible values of two or more variables. Constraint satisfaction problem is the problem to find states that each variable has a value that satisfies all the constraints on the variable. 
+
+Back-tracking search: Back-tracking search is a kind of depth-first search where a single representation of the state is updated for each successor and should be restored when arrives the end of the path.
+
+Back-jumping: Back-jumping is an strategy that make back-tracking search more efficient, it will let the algorithm jump back more than one step when the dead end is reached.
+
+Min-conflicts: Min-conflicts is a kind of heuristic strategy with local search on CSP problems. We choose the value with fewest conflict with others.
+
+2. How many solutions are there for the three-color map-coloring problem in Figure 1? Elaborate your answer.
+
+WA, NT and SA are three vertices of a triangle, so they must have three different colors. When the color of the SA and NT are determined, the color of Q only have one choice. When the color of the SA and Q are determined, the color of NSW only have one choice. When the color of the SA and NSW are determined, the color of V only have one choice. So,when the colors of WA, NT and SA are determined, the color of the upper area is determined. WA, NT and SA WA, NT and SA have 6 color-combinations, and T have 3 colors to choose. So, we have 6*3=18 solutions of this problem.
+
+Exercise 4.2 
+
+1. How is this problem represented in general (write in your own words). Define the states, the goal-test, and the successor function of your problem.
+
+We define each state as a point of a graph, and the border between the two states is the edge between two points. And we define a state as a list of numbers in (0,3) means the colors of the 50 states of US. 
+Goal-test: We compare the colors of the two points of each edge in the graph. If every edge's two points have different color. The state is a goal state.
+Successor function: We build a population which have 100 random initial individuals. Then we  create a child population. Every we choose two individual from parent population and use hybridization and mutation function to create two new individual, we append these two individuals to the child population.
+And next we use the child population to find next child population, until we find a goal state.

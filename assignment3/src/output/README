@@ -1,0 +1,11 @@
+This directory contains the source file and a Makefile for generating a random
+environment. The new environment will be saved as environment.txt and
+environment.js and will be read on startup by your program.
+
+This directory already contains an environment, but if you'd like to, you may
+regenerate a new one:
+
+$ make
+$ ./make_env
+
+To see the output of your program, open index.html.

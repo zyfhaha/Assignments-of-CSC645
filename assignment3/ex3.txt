@@ -1,0 +1,23 @@
+Assignment 3
+
+Exercise 3.1 
+The heuristic path algorithm is a best-first search in which the objective function is f(n) = (2 - w)g(n) + w*h(n). For what values of w is this algorithm guaranteed to be optimal? What kind of search does this perform when w = 0? When w = 1? When w = 2?
+
+When w=0 , f(n) = 2g(n). This search algorithm only searches bases on g(x), so the algorithm should be Uniform-cost search.
+When w=1, f(n)= g(n)+h(n). This search algorithm bases on both g(x) and h(x), so the algorithm should be A-star search, and at this time ,this algorithm guaranteed to be optimal.
+When w=0, f(n)= 2h(n). This search algorithm only bases on h(x), so the algorithm should be Greedy best-first search.
+
+Exercise 3.2
+1. Suppose the state space consists of all positions (x, y) on the plane. How many states are there? How many paths are there to the goal?
+
+Because of there is infinite number of points on the plane, There are infinite number of states and infinite paths to the goal.
+
+2. Explain briefly why the shortest path from one polygon vertex to any other in the scene must consist of straight-line segments joining some of the vertices of the polygons. Define a good state space now. How large is this state space?
+
+We all know that the line between the two points is the shortest. But if there are many obstacles between our two points, then the shortest line must consist of a series of line segments, and at the same time, the line segments should be kept as far as possible from the line between the two points. And because the obstacles in the problem are all polygons, the two segments of the line segment must be the vertices of the polygon, otherwise the line segment will create a gap and thus deviate more from the line between the original two points.
+
+The state space should be a set of vertices of the obstacles.The size of state space is equal to the number of vertices of all polygons plus two(the start and goal point).
+
+3.Define the necessary functions to implement the search problem, including a successor function that takes a vertex as input and returns the set of vertices that can be reached in a straight line from the given vertex. (Also think about the neighbors on the same polygon.) Use the straight-line distance for the heuristic function.
+
+In my program, when the environment is built, I put all of the points to the list self.points, and use two lists self.sides_point1 and self.sides_point2 to store all of the sides in the obstacles. When we want to find the successor points of one point, we connect point i and this point into a line segment. If the line segment does not intersect any sides of the obstacles, then point i can become the successor point of this point. For some special cases, when two points belong to the same polygon, if the two points are adjacent, then one point can be the successor node of the other point.
