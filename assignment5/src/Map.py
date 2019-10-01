@@ -1,27 +1,66 @@
+import networkx as nx
+import matplotlib.pyplot as plt
+
 class Border:
-    def __init__(self,in1,in2):
-        self.index1=in1
-        self.index2=in2
+    def __init__(self, in1, in2):
+        self.index1 = in1
+        self.index2 = in2
+
 
 class Map:
-    def __init__(self,file):
-        self.states=[]
-        self.borders=[]
-        self.graph=[]
-        self.graphnum=[]
+    def __init__(self, file):
+        self.states = []
+        self.borders = []
+        self.graph = []
+        self.graphnum = []
+        self.visited = []
+        self.datalist = []
+        self.colors=[]
         with open(file, 'r') as f:
             for line in f:
                 p = list(line.split(','))
-                fin=p.pop()
-                fin=fin.split('\n')
+                fin = p.pop()
+                fin = fin.split('\n')
                 p.append(fin[0])
                 self.states.append(p[0])
+                self.visited.append(0)
+                self.datalist.append([0, 1, 2, 3])
+                self.colors.append(-1)
                 self.graph.append(p)
         for i in range(len(self.graph)):
-            q=[]
-            for j in range(1,len(self.graph[i])):
+            q = []
+            for j in range(1, len(self.graph[i])):
                 for k in range(len(self.states)):
-                    if self.states[k]==self.graph[i][j]:
-                        self.borders.append(Border(i,k))
+                    if self.states[k] == self.graph[i][j]:
+                        self.borders.append(Border(i, k))
                         q.append(k)
             self.graphnum.append(q)
+
+    def picprint(self):
+        labels = {}
+        for i in range(len(self.states)):
+            labels[i + 1] = self.states[i]
+
+        G = nx.Graph()
+        for i in range(len(self.borders)):
+            G.add_edge(int(self.borders[i].index1) + 1, int(self.borders[i].index2) + 1)
+        pos = nx.spring_layout(G)
+        colors = []
+        nodesp = list(G.node())
+        for i in range(len(nodesp)):
+            ppp = self.colors[nodesp[i] - 1]
+            colors.append(ppp)
+        nx.draw_networkx_nodes(G, pos, node_color=colors)
+        nx.draw_networkx_edges(G, pos)
+        nx.draw_networkx_labels(G, pos, labels)
+        plt.axis('off')
+        plt.savefig("us_states.png")
+        plt.show()
+
+    def isgoal(self):
+        flag = 1
+        for i in range(len(self.borders)):
+            if self.colors[self.borders[i].index1] == self.colors[self.borders[i].index2]:
+                flag = 0
+        return flag
+

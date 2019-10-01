@@ -1,6 +1,10 @@
 from Map import Map
+from Back_tracking import Back_tracking
 
-map = Map('us_states_51_ij.txt')
+print('Which map do you want to search?(10/51):')
+num_state=int(input())
+map = Map('us_states_'+str(num_state)+'_ij.txt')
 
-for i in range(len(map.states)):
-    print(map.states[i])
+map.picprint()
+
+Back_tracking(map,0)
