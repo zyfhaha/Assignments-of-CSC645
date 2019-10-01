@@ -15,7 +15,8 @@ class Map:
         self.graphnum = []
         self.visited = []
         self.datalist = []
-        self.colors=[]
+        self.colors = []
+        self.neighbour = []
         with open(file, 'r') as f:
             for line in f:
                 p = list(line.split(','))
@@ -26,6 +27,7 @@ class Map:
                 self.visited.append(0)
                 self.datalist.append([0, 1, 2, 3])
                 self.colors.append(-1)
+                self.neighbour.append([])
                 self.graph.append(p)
         for i in range(len(self.graph)):
             q = []
@@ -35,6 +37,10 @@ class Map:
                         self.borders.append(Border(i, k))
                         q.append(k)
             self.graphnum.append(q)
+
+        for i in range(len(self.borders)):
+            self.neighbour[self.borders[i].index1].append(self.borders[i].index2)
+            self.neighbour[self.borders[i].index2].append(self.borders[i].index1)
 
     def picprint(self):
         labels = {}
@@ -57,10 +63,18 @@ class Map:
         plt.savefig("us_states.png")
         plt.show()
 
+    def textprint(self):
+        for i in range(len(self.graphnum)):
+            print(self.states[i],'(',self.colors[i],')','-->',end='')
+            for j in range(len(self.graphnum[i])):
+                print(self.states[self.graphnum[i][j]],'(',self.colors[self.graphnum[i][j]],')',' ',end='')
+            print()
+
     def isgoal(self):
         flag = 1
         for i in range(len(self.borders)):
             if self.colors[self.borders[i].index1] == self.colors[self.borders[i].index2]:
                 flag = 0
+                break
         return flag
 
