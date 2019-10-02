@@ -1,4 +1,4 @@
-def Back_forward(map,step):
+def Back_forward(map,step, s_type):
     location = -1
     if step == len(map.states):
         if map.isgoal() == 1:
@@ -12,6 +12,16 @@ def Back_forward(map,step):
             if map.visited[i] == 0:
                 location = i
                 break
+        if s_type==1:
+            tt=location
+            for i in range(tt,len(map.states)):
+                if map.visited[i]==0 and map.num_neighbour[i]>map.num_neighbour[location]:
+                    location=i
+        if s_type==2:
+            tt=location
+            for i in range(tt,len(map.states)):
+                if map.visited[i]==0 and len(map.datalist[i]) < len(map.datalist[location]):
+                    location=i
         map.visited[location] = 1
         for i in range(len(map.datalist[location])):
             del_index=[]
@@ -31,7 +41,7 @@ def Back_forward(map,step):
                         del_index.append(map.neighbour[location][j])
                         del_color.append(map.colors[location])
             if isaviliable == 1:
-                Back_forward(map, step + 1)
+                Back_forward(map, step + 1, s_type)
             for j in range(len(del_index)):
                 map.datalist[del_index[j]].append(del_color[j])
         map.visited[location] = 0
