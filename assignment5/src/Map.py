@@ -1,6 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 
+
 class Border:
     def __init__(self, in1, in2):
         self.index1 = in1
@@ -17,7 +18,7 @@ class Map:
         self.datalist = []
         self.colors = []
         self.neighbour = []
-        self.num_neighbour=[]
+        self.num_neighbour = []
         with open(file, 'r') as f:
             for line in f:
                 p = list(line.split(','))
@@ -69,9 +70,9 @@ class Map:
 
     def textprint(self):
         for i in range(len(self.graphnum)):
-            print(self.states[i],'(',self.colors[i],')','-->',end='')
+            print(self.states[i], '(', self.colors[i], ')', '-->', end='')
             for j in range(len(self.graphnum[i])):
-                print(self.states[self.graphnum[i][j]],'(',self.colors[self.graphnum[i][j]],')',' ',end='')
+                print(self.states[self.graphnum[i][j]], '(', self.colors[self.graphnum[i][j]], ')', ' ', end='')
             print()
 
     def isgoal(self):
@@ -81,5 +82,3 @@ class Map:
                 flag = 0
                 break
         return flag
-
-

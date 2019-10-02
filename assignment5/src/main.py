@@ -1,5 +1,6 @@
 import random
 from Map import Map
+from Sudoku import Sudoku
 from Back_tracking import Back_tracking
 from Back_forward import Back_forward
 from Back_AC3 import Back_AC3
@@ -48,3 +49,5 @@ if pb=='usa':
         Back_forward(map,start_step,s_type,lcv)
     if pn==2:
         Back_AC3(map,start_step,s_type,lcv)
+else:
+    sudoku=Sudoku()
