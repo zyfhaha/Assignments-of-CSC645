@@ -17,6 +17,7 @@ class Map:
         self.datalist = []
         self.colors = []
         self.neighbour = []
+        self.num_neighbour=[]
         with open(file, 'r') as f:
             for line in f:
                 p = list(line.split(','))
@@ -41,6 +42,9 @@ class Map:
         for i in range(len(self.borders)):
             self.neighbour[self.borders[i].index1].append(self.borders[i].index2)
             self.neighbour[self.borders[i].index2].append(self.borders[i].index1)
+
+        for i in range(len(self.neighbour)):
+            self.num_neighbour.append(len(self.neighbour[i]))
 
     def picprint(self):
         labels = {}

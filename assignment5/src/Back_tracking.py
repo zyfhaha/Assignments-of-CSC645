@@ -1,4 +1,4 @@
-def Back_tracking(map, step):
+def Back_tracking(map, step, s_type):
     location = -1
     if step == len(map.states):
         if map.isgoal() == 1:
@@ -12,6 +12,8 @@ def Back_tracking(map, step):
             if map.visited[i] == 0:
                 location = i
                 break
+        if s_type==1:
+
         map.visited[location] = 1
         for i in range(len(map.datalist[location])):
             map.colors[location] = map.datalist[location][i]
