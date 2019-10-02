@@ -32,7 +32,14 @@ def AC3_check(map, del_index, del_color):
         checklist.append(constraint(map.borders[i].index2, map.borders[i].index1))
     while len(checklist)!=0:
         cons=checklist.pop()
-
+        if map.visited[cons.l_point]==0 and map.visited[cons.r_point]==0:
+            removed, isaviliable=remove(map,cons.l_point,cons.r_point,del_index,del_color)
+            if isaviliable == 0:
+                flag=0
+                break
+            elif removed == 1:
+                for i in range(len(map.neighbour[cons.l_point])):
+                    checklist.append(constraint(map.neighbour[cons.l_point][i],cons.l_point))
     return flag
 
 
@@ -68,6 +75,8 @@ def Back_AC3(map,step):
                             isaviliable = 0
                         del_index.append(map.neighbour[location][j])
                         del_color.append(map.colors[location])
+            if AC3_check(map,del_index,del_color)==0:
+                isaviliable=0
             if isaviliable == 1:
                 Back_AC3(map, step + 1)
             for j in range(len(del_index)):
