@@ -1,4 +1,4 @@
-def Back_tracking(map, step, s_type):
+def Back_tracking(map, step, s_type, lcv):
     location = -1
     if step == len(map.states):
         if map.isgoal() == 1:
@@ -31,7 +31,7 @@ def Back_tracking(map, step, s_type):
                         map.colors[location]:
                     isaviliable = 0
             if isaviliable == 1:
-                Back_tracking(map, step + 1, s_type)
+                Back_tracking(map, step + 1, s_type, lcv)
         map.visited[location] = 0
         map.colors[location] = -1
     return 0

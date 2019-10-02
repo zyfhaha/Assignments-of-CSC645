@@ -45,7 +45,7 @@ def AC3_check(map, del_index, del_color):
     return flag
 
 
-def Back_AC3(map, step, s_type):
+def Back_AC3(map, step, s_type, lcv):
     location = -1
     if step == len(map.states):
         if map.isgoal() == 1:
@@ -90,7 +90,7 @@ def Back_AC3(map, step, s_type):
             if AC3_check(map, del_index, del_color) == 0:
                 isaviliable = 0
             if isaviliable == 1:
-                Back_AC3(map, step + 1, s_type)
+                Back_AC3(map, step + 1, s_type, lcv)
             for j in range(len(del_index)):
                 map.datalist[del_index[j]].append(del_color[j])
         map.visited[location] = 0
