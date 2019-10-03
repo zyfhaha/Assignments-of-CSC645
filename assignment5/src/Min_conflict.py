@@ -1,7 +1,7 @@
 import random
 import datetime
 
-def Min_conflict(map):
+def Min_conflict(map,time):
     for i in range(len(map.colors)):
         if map.visited[i] == 0:
             map.colors[i] = random.randint(1, 9)
@@ -23,6 +23,8 @@ def Min_conflict(map):
         goal_flag = map.isgoal()
         step += 1
     if map.isgoal() == 1:
+        end_t = datetime.datetime.now()
+        print('Time cost:', end_t - time)
         map.textprint()
         map.picprint()
     else:
