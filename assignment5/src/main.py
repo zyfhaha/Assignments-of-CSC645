@@ -77,9 +77,6 @@ else:
         lcv = 0
 
     if pn == 0:
-        print('WARNING!!!!!It will take a long time(larger than 5 minutes), do you want to wait?(Y/N)')
-        if input() == 'N':
-            exit()
         start = datetime.datetime.now()
         Back_tracking(sudoku, 0, s_type, lcv, start)
     if pn == 1:

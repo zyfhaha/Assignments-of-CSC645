@@ -9,3 +9,11 @@ We should color every states in the map within 4 colors. Every states in the map
 The file table1.xlsx is the table of run times in different cases. Because of the run time of 10-states problem is very short, we run the program on 51-states problem. In the table we can find that if we use forward-check or AC3 when we use back-tracking, it will save a lot of time. Back-tracking with AC3 can save more time than back-tracking with forward-check. If we have a initial assignment for one state, the time of running this program are a little bit more than the case we do not have a initial assignment for one state. If we use min-conflict search, it can find a solution quickly in 10-state problem, but it can not find a solution within limit time in 51-state problem.
 
 3.You have implemented the same problem with different algorithms(assignment 4+5). What have you learned from the two exercises? Is there a preference of one algorithm over the other? If yes, please comment on that. If no, please do the same :-).
+
+If we define a problem in different ways, we may have different kinds of algorithm to solve it. In this problem, I think the back-tracking with AC3 is the best algorithm to solve this problem. This algorithm takes the least amount of time and is sure to find a solution.
+
+Exercise 5.2
+
+In this question I built a new table named table2.xlsx. In this file, I wrote down the runtime of the two problems solved by different kinds of algorithms.
+For USA(51 states) problem, the best algorithms to solve the problem are Back-tracking with Degree heuristic and Back-tracking with forward-check, MRV. Because of the time cost to find a least-constraining-value, LCV is not a good method in this problem.
+For Sudoku problem, the best algorithm to solve the problem is Back-tracking with forward-check. Because of large amount of constrains in the problem, AC3 is not a good method to solve this problem.
