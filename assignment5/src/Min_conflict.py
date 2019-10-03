@@ -1,10 +1,13 @@
 import random
 import datetime
 
-def Min_conflict(map,time):
+def Min_conflict(map,time,type):
     for i in range(len(map.colors)):
         if map.visited[i] == 0:
-            map.colors[i] = random.randint(1, 9)
+            if type==0:
+                map.colors[i] = random.randint(0, 3)
+            else:
+                map.colors[i] = random.randint(1, 9)
     step = 0
     goal_flag = map.isgoal()
     while goal_flag == 0 and step < 100000:

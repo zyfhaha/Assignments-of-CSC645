@@ -22,7 +22,7 @@ if pb == 'usa':
     pn = int(input())
     if pn == 3:
         start = datetime.datetime.now()
-        Min_conflict(map,start)
+        Min_conflict(map,start,0)
         exit()
     print('Which method do you want to use?(0/1/2):')
     print('0--None')
@@ -41,7 +41,7 @@ if pb == 'usa':
         start_step = 1
     if pn == 0:
         if num_state == 51:
-            print('WARNING!!!!!It will take a long time(about 5 minutes), do you want to wait?(Y/N)')
+            print('WARNING!!!!!It will take a long time(about few minutes), do you want to wait?(Y/N)')
             if input() == 'N':
                 exit()
         start = datetime.datetime.now()
@@ -63,7 +63,7 @@ else:
     pn = int(input())
     if pn == 3:
         start = datetime.datetime.now()
-        Min_conflict(sudoku,start)
+        Min_conflict(sudoku,start,1)
         exit()
     print('Which method do you want to use?(0/1/2):')
     print('0--None')
