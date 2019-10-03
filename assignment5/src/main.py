@@ -1,4 +1,5 @@
 import random
+import datetime
 from Map import Map
 from Sudoku import Sudoku
 from Back_tracking import Back_tracking
@@ -20,12 +21,15 @@ if pb=='usa':
     print('3--Min-conflict search')
     pn=int(input())
     if pn==3:
+        start=datetime.datetime.now()
         Min_conflict(map)
+        end_t=datetime.datetime.now()
+        print('Time cost:',end_t-start)
         exit()
     print('Which method do you want to use?(0/1/2):')
     print('0--None')
     print('1--Degree heuristic')
-    print('2-MRV')
+    print('2--MRV')
     s_type=int(input())
     print('Do you want to use LCV?(Y/N)')
     if input()=='Y':
@@ -37,17 +41,54 @@ if pb=='usa':
         map.colors[0]=random.randint(0, 3)
         map.visited[0]=1
         start_step=1
-    if pn==3:
-        Min_conflict(map)
     if pn==0:
         if num_state==51:
-            print('It will take a long time(about 5 minutes), do you want to wait(Y/N):')
+            print('WARNING!!!!!It will take a long time(about 5 minutes), do you want to wait?(Y/N)')
             if input()=='N':
                 exit()
-        Back_tracking(map,start_step,s_type,lcv)
+        start = datetime.datetime.now()
+        Back_tracking(map,start_step,s_type,lcv,start)
     if pn==1:
-        Back_forward(map,start_step,s_type,lcv)
+        start = datetime.datetime.now()
+        Back_forward(map,start_step,s_type,lcv,start)
     if pn==2:
-        Back_AC3(map,start_step,s_type,lcv)
+        start = datetime.datetime.now()
+        Back_AC3(map,start_step,s_type,lcv,start)
+
 else:
     sudoku=Sudoku()
+    print('Which algorithm do you want to use?(0/1/2/3)')
+    print('0--pure back-tracking')
+    print('1--back-tracking with forward-check')
+    print('2--back-tracking with AC3')
+    print('3--Min-conflict search')
+    pn = int(input())
+    if pn == 3:
+        start = datetime.datetime.now()
+        Min_conflict(sudoku)
+        end_t = datetime.datetime.now()
+        print('Time cost:', end_t - start)
+        exit()
+    print('Which method do you want to use?(0/1/2):')
+    print('0--None')
+    print('1--Degree heuristic')
+    print('2--MRV')
+    s_type = int(input())
+    print('Do you want to use LCV?(Y/N)')
+    if input() == 'Y':
+        lcv = 1
+    else:
+        lcv = 0
+
+    if pn==0:
+        print('WARNING!!!!!It will take a long time(larger than 5 minutes), do you want to wait?(Y/N)')
+        if input()=='N':
+            exit()
+        start = datetime.datetime.now()
+        Back_tracking(sudoku,0,s_type,lcv,start)
+    if pn==1:
+        start = datetime.datetime.now()
+        Back_forward(sudoku,0,s_type,lcv,start)
+    if pn==2:
+        start = datetime.datetime.now()
+        Back_AC3(sudoku,0,s_type,lcv,start)

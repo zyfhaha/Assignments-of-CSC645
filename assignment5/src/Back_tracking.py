@@ -1,7 +1,11 @@
-def Back_tracking(map, step, s_type, lcv):
+import datetime
+
+def Back_tracking(map, step, s_type, lcv, time):
     location = -1
     if step == len(map.states):
         if map.isgoal() == 1:
+            end_t = datetime.datetime.now()
+            print('Time cost:', end_t - time)
             map.picprint()
             map.textprint()
             exit()
@@ -23,6 +27,26 @@ def Back_tracking(map, step, s_type, lcv):
                 if map.visited[i]==0 and len(map.datalist[i]) < len(map.datalist[location]):
                     location=i
         map.visited[location] = 1
+
+        if lcv==1:
+            lcv_list=[]
+            for i in range(len(map.datalist[location])):
+                sum_l=0
+                for j in range(len(map.neighbour[location])):
+                    for k in range(len(map.datalist[map.neighbour[location][j]])):
+                        if map.datalist[location][i]==map.datalist[map.neighbour[location][j]][k]:
+                            sum_l+=1
+                lcv_list.append(sum_l)
+            for i in range(len(lcv_list)-1):
+                for j in range(len(lcv_list)-i-2):
+                    if lcv_list[j]>lcv_list[j+1]:
+                        ttt=lcv_list[j]
+                        lcv_list[j]=lcv_list[j+1]
+                        lcv_list[j+1]=ttt
+                        tttt=map.datalist[location][j]
+                        map.datalist[location][j]=map.datalist[location][j+1]
+                        map.datalist[location][j+1]=tttt
+
         for i in range(len(map.datalist[location])):
             map.colors[location] = map.datalist[location][i]
             isaviliable = 1
@@ -31,7 +55,7 @@ def Back_tracking(map, step, s_type, lcv):
                         map.colors[location]:
                     isaviliable = 0
             if isaviliable == 1:
-                Back_tracking(map, step + 1, s_type, lcv)
+                Back_tracking(map, step + 1, s_type, lcv,time)
         map.visited[location] = 0
         map.colors[location] = -1
     return 0
