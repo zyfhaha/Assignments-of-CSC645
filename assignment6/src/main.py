@@ -19,5 +19,5 @@ else:
     st=1
     s=TicState(1)
 
-while 
+while
 
