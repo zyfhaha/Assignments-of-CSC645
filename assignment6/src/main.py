@@ -34,10 +34,16 @@ while s.isTerminal() == 0:
         st = 1
         print('Which square do you want to set? (1--9) ')
         temp = int(input())
-        while temp < 1 or temp > 9:
-            print('Which square do you want to set? (1--9) ')
+        while temp < 1 or temp > 9 or s.field[temp-1]!=0:
+            print('You must give a valid input!!!')
             temp = int(input())
         a = TicAction(-1, temp - 1)
         s = s.getresult(a)
         s.player = 1
     s.ansprint()
+if s.utility==0:
+    print('Draw')
+elif s.utility==1:
+    print('You lost')
+else:
+    print('You win')

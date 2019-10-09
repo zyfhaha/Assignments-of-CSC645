@@ -1,6 +1,5 @@
 from TicAction import TicAction
 
-
 class TicState:
     def __init__(self, player):
         self.field = []
@@ -34,7 +33,7 @@ class TicState:
         if self.field[3]==self.field[4] and self.field[4]==self.field[5] and self.field[3]!=0:
             self.line=1
             return 1
-        if self.field[6]==self.field[7] and self.field[1]==self.field[8] and self.field[6]!=0:
+        if self.field[6]==self.field[7] and self.field[6]==self.field[8] and self.field[6]!=0:
             self.line=2
             return 1
         if self.field[0]==self.field[3] and self.field[3]==self.field[6] and self.field[0]!=0:
