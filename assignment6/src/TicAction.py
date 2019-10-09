@@ -1,4 +1,4 @@
 class TicAction:
     def __init__(self,square,position):
-        self.square=square
+        self.player=square
         self.position=position

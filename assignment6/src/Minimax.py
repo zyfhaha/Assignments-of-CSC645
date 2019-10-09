@@ -1,4 +1,5 @@
 from TicAction import TicAction
+from TicState import TicState
 
 class Minimax:
     def __init__(self,usepurning):
