@@ -1,0 +1,9 @@
+Exercise 6.1
+
+1.Discuss how well the standard approach to game playing (Minimax, Expectiminimax) would apply to games such as tennis, pool, and soccer, which take place in a continuous, physical state space. Here are some hints for the discussion: a) Would the approach work? b) What would be the state space size? c) What would it take to make the approach work in theory? d) Would it work in practice?
+
+Take tennis for example, we define the moment when the player hits the tennis ball as a state. The player's position, the speed of the tennis ball, and even the speed of the wind are the elements of a state. If the opponent can not catch the ball, the utility is 1. If we can not catch the ball, the utility is -1, else the utility is 0. When we do different actions, it will generate different states. The size of the state space will not be infinite, because the sum of actions we can do is not infinite. It works in theory, we can use minimax to decide which action we should do. In practice, however, there are so many unknow elements in a state, it will be hard to decide which action is the best one.
+
+2.Describe how the minimax and alpha-beta algorithms change for two-player, nonzero-sum games, in which each player has his or her own utility function (for the leaf nodes). You may assume that each player knows the other¡¯s utility function. If there are no constraints on the two terminal utilities, is it possible for any node to be pruned by alpha-beta? Discuss this subject.
+
+The minimax algorithm for non-zero-sum games works similarly with zero-game. The different thing is that the evaluation function of the algorithm is a vector of values, one for each player, instead of a single value. Each step selects whichever vector has the highest value for player who should move at this turn. Alpha-beta purning is not possible for this kind of case, because you should check every leaf-node to find a node which is optimal for both player.
