@@ -4,6 +4,7 @@ from TicState import TicState
 class Minimax:
     def __init__(self,usepurning):
         self.usepurning=usepurning
+        self.numberOfStates=0
 
     def MinimaxDecision(self,state):
         a_list=state.getActions()
@@ -14,9 +15,11 @@ class Minimax:
             if ut>max_ut:
                 max_ut=ut
                 max_act=act
+        print('State space size: ',self.numberOfStates)
         return max_act
 
     def MaxValue(self,state,alpha,beta):
+        self.numberOfStates+=1
         if state.isTerminal()==1:
             return state.utility
         v=-2
@@ -30,6 +33,7 @@ class Minimax:
         return v
 
     def MinValue(self,state,alpha,beta):
+        self.numberOfStates += 1
         if state.isTerminal() == 1:
             return state.utility
         v = 2

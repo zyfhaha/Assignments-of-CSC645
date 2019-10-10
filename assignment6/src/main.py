@@ -29,6 +29,10 @@ while s.isTerminal() == 0:
         st = -1
         s = s.getresult(minimax.MinimaxDecision(s))
         s.player = -1
+        if ch == 'Y':
+            minimax = Minimax(1)
+        else:
+            minimax = Minimax(0)
         print('The computer set a square: ')
     else:
         st = 1
