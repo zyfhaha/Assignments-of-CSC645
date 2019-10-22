@@ -1,0 +1,38 @@
+Exercise 7.1
+
+1. It is rational for an agent to hold the three beliefs P(A)=0.4, P(B)=0.3, and P(A  ¡ÅB)=0.5. In this case, P(A¡ÄB)=P(A)+P(B)-P(A¡ÅB)=0.4 + 0.3 - 0.5 = 0.2. The file named table1.xlsx is the table to show how it supports my argument about rationality. The file named table2.xlsx is the table where P(A¡ÅB)=0.7.
+In four cases, the only case which is a loss have the probability of 0.(P(A¡ÄB)=P(A)+P(B)-P(A¡ÅB)=0.4+0.3-0.7=0). So, it is rational to have this probability.
+
+2. 
+
+(a) p(toothache) = 0.108+0.012+0.016+0.064=0.2
+
+(b) P(Cavity) = P(Cavity,toothache,catch)+P(Cavity,toothache,©´catch)+P(Cavity,©´toothache,catch)+P(Cavity,©´toothache,©´catch)=<0.108,0.016>+<0.012,0.064>+<0.072,0.144>+<0.008,0.576>=<0.2,0.8>
+
+(c) P(Toothache|cavity)=¦ÁP(Toothache,cavity)=¦Á[P(Toothache,cavity,catch)+P(Toothache,cavity,©´catch)]=¦Á[<0.108,0.072>+<0.012,0.008>]=¦Á<0.12,0.08>=<0.6,0.4>
+
+(d) 
+p(toothache¡Åcatch)=0.108+0.012+0.072+0.016+0.064+0.144=0.416
+P(Cavity|toothache¡Åcatch)=¦ÁP(Cavity,toothache¡Åcatch)=¦Á[<0.108,0.016>+<0.012+0.064>+<0.072,0.144>]=¦Á<0.192,0.224>=<0.462,0.538>
+
+3. p(disease|positive)=p(positive|disease)*p(disease)/p(positive).
+As a result, if p(disease) is very low, p(disease|positive) will become very low.
+We know that p(positive|disease)=1, p(disease)=1/10000, p(positive)=0.99.
+So, p(disease|positive)=0.01%. The chance to have the disease is about 0.01%.
+
+4.
+(a) 
+p(BAR/BAR/BAR)=1/4*1/4*1/4=1/64
+p(BELL/BELL/BELL)=1/4*1/4*1/4=1/64
+p(LEMON/LEMON/LEMON)=1/4*1/4*1/4=1/64
+p(CHERRY/CHERRY/CHERRY)=1/4*1/4*1/4=1/64
+p(CHERRY/CHERRY/?)=1/4*1/4*3/4=3/64
+p(CHERRY/?/?)=1/4*3/4*4/4=12/64
+E(payback)=20*1/64+15*1/64+5*1/64+3*1/64+2*3/64+1*12/64=61/64
+For each coin played, the expected coin return is 61/64.
+
+(b)
+p(win)=1/64+1/64+1/64+1/64+3/64+12/64=19/64
+The probability that playing the slot machine once will result in a win is 19/64.
+
+(c)I write a python file named main.py, and play this game for 10000 times. The mean number of plays is 211.5534, the median number is 21.
