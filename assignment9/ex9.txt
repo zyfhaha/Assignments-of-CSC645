@@ -1,0 +1,60 @@
+Exercise 9.1
+
+(a) Draw a Bayesian network for this domain, given that the gauge is more likely to fail when the core temperature gets too high.
+
+Suppose that the threshold we give is Th. The alarm sounds when G>Th. T and FG should be the parents node of G. G and FA should be the parents node of A. I draw the network in figure1.pdf.
+
+(b) Is your network a polytree?
+
+The network is not a polytree, because T can affect G in two ways, and there is a circle among T, G and FG.
+
+(c) Suppose there are just two possible actual and measured temperatures, Normal and High; the probability that gauge gives the correct temperature is x when it is working, but y when it is faulty. Give the conditional probability table associated with G.
+
+I made this CPT in table1.xlsx.
+
+(d) Suppose the alarm works correctly unless it is faulty, in which case it never sounds. Give the conditional probability table associated with A.
+
+I made this CPT in table2.xlsx.
+
+2. This exercise is concerned with the variable elimination algorithm given in the figure 14.11 below.
+
+(a) Section 14.4 in the textbook applies variable elimination to the query P(Burglary|JohnCalls = true, maryCalls = true).
+
+We define B=Burglary, j=JohnCalls = true, m=maryCalls = true.
+f4(A)=<P(j|a),P(j|©´a)>=<0.9,0.05>
+f5(A)=<P(m|a),P(m|©´a)>=<0.7,0.01>
+
+f6(B,E)=(f3(a,B,E)*f4(a)*f5(a))+(f3(©´a,B,E)*f4(©´a)*f5(©´a))
+=0.63*f3(a,B,E)+0.0005*f3(©´a,B,E)
+=0.63*<0.95,0.94,0.29,0.001>+0.0005*<0.05,0.06,0.71,0.999>
+=<0.599,0.592,0.183,0.00113>
+
+f7(B)=f2(e)*f6(B,e)+f2(©´e)*f6(B,©´e)
+=0.002*<0.599,0.183>+0.998*<0.592,0.00113>
+=<0.592,0.001494>
+
+P(B|j,m)= ¦Áf1(B)*f7(B) 
+=¦Á<0.001,0.999>*<0.592,0.0014>
+=¦Á<0.00592,0.00149>
+¡Ö<0.284,0.716>
+
+The answer is same with the answer given by Enumeration algorithm.
+
+(b) Count the number of arithmetic operations performed and compare this with the number performed by the enumeration algorithm.
+
+The number of arithmetic operations in the variable elimination algorithm:
+addition:7
+multiply:16
+divisions:2
+The number of arithmetic operations in the enumeration algorithm:
+addition:7
+multiply:18
+divisions:2
+
+(c) Suppose a network has the form of a chain - a sequence of Boolean variables X1, ... , Xn where Parents(Xi) = Xi-1 for i = 2,... , n. What is the complexity of computing P(X1|Xn = true) using enumeration? Using variable elimination?
+
+If the network has the form of a chain, the complexity of computing P(X1|Xn = true) using enumeration is O(2^n), because of every node have 2 cases to calculate. The complexity of using variable elimination is O(n), because we can only calculate every node for one time.
+
+(d) Prove that the complexity of running variable elimination on a polytree network is linear in the size of the tree for any variable ordering consistent with the network structure.
+
+For every node in the tree, it will only be calculate for one time using variable elimination. The complexity of running will be linear in the size of the number of nodes in the tree.

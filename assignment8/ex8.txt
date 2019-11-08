@@ -1,0 +1,72 @@
+Exercise 8.1
+
+1. You are a witness of a night-time hit-and-run accident involving a taxi in Athens. All taxis in Athens are blue or green. You swear, under oath, that the taxi was blue. Extensive testing shows that under the dim lighting conditions, discrimination between blue and green is 75% reliable.
+
+(a) Is it possible to calculate the most likely color for the taxi?
+
+We define P(LB|B) is the probability that the taxi looked blue, given that it was blue. As we know P(LB|B)=0.75, and P(©´LB|©´B)=0.75. We swear that the taxi was blue, so P(LB)=1.
+According to P(B|LB)=P(LB|B)P(B)/P(LB), P(B|LB)=0.75P(B). Because we don't know P(B), the probability of the taxi was blue given that the taxi looked blue can not be calculated. If P(B) is larger than 2/3, P(B|LB)>0.5, the most likely color for the taxi is blue, else the most likely color is green.
+
+(b) What now, given that 9 out of 10 Athenian taxis are green?
+
+P(B)=1/10, P(B|LB)=0.75P(B)=3/40<0.5. So, the most likely color of the taxi is green.
+
+2. Text categorization is the task of assigning a given document to one of a fixed set of categories, based on the text it contains. Naive Bayes models are often used for this task. In these models, the query variable is the document category, and the ¡±effect¡± variables are the presence or absence of each word in the language; the assumption is that words occur independently in documents, with frequencies determined by the document category.
+
+(a) Explain precisely how such a model can be constructed, given as "training data" a set of documents that have been assigned to categories.
+
+We should calculate the prior probability P(Category) first, and than calculate every word's conditional probability P(Word[i]|Category). For each c in all categories, we define P(Category=c) as the probability that a document belong to category c. P(word[i]=true|Category=c) means the probability that a document belong to c and contain the word i.P(word[i]=false|Category=c) means the probability that a document belong to c and do not contain the word i.
+
+(b) Explain precisely how to categorize a new document.
+
+We define a function fword(i), if the new document contain the word i, fword(i)=true, else fword(i)=false.
+For a new document and each c in all categories, we calculate Pa=¦°P(word[i]=fword(i)|Category=c)*P(Category=c). We find cmax in all of c to maximize Pa, cmax is the category the new document belong to.
+
+(c) Is the independence assumption reasonable? Discuss.
+
+I think the independence assumption is not reasonable. Take the word pair "normal distribution" for example, the probability of the word pair "normal distribution" is larger than the multiply probabilities of "normal" and "distribution".
+
+3. Consider the network for car diagnosis shown in figure below.
+
+(a) Extend the network with the Boolean variables IcyWeather and StarterMotor.
+
+If you want to start, Ignition, gas and startermotor are needed, so the startermotor should the parent of starts. If icyweather comes, the battery and startermotor may not work, so the IcyWeather should be the parent of Battery and StarterMotor.The new network is shown in picture1.pdf .
+
+(b) Give reasonable conditional probability tables for all the nodes.
+
+P(IcyWeather)=0.03
+P(Battery|IcyWeather)=0.97, P(Battery|©´IcyWeather)=0.999
+P(StarterMotor|IcyWeather)=0.95, P(Battery|©´IcyWeather)=0.998
+P(Radio|Battery)=0.999, P(Radio|©´Battery)=0.001
+P(Ignition|Battery)=0.997, P(Ignition|©´Battery)=0.03
+P(Gas)=0.95
+P(Starts|Ignition,StarterMotor,Gas)=0.999, other cases 0
+P(Moves|Starts)=0.999
+
+(c)How many independent values are contained in the joint probability distribution for eight Boolean nodes, assuming no conditional independence relations hold among them?
+
+Because we have 8 Boolean variables, the number of independent entries is 2^8-1=255
+
+(d) How many independent probability values do your network tables contain?
+
+P(IcyWeather) entries 1
+P(StarterMotor) entries 2
+P(Battery) entries 2
+P(Radio) entries 2
+P(Ignition) entries 2
+P(Gas) entries 1
+P(Starts) entries 8
+P(Moves) entries 2
+1+2+2+2+1+8+2=20
+The total number of indendent CPT entries is 20.
+
+(e) The conditional distribution for Starts could be described as a noisy-AND distribution. Define this family in general and relate it to the noisy-OR distribution.
+
+In the CPT for Starts, the entries are zero unless all of the conditions are true. If we add more conditions, the entry will get close to 1.
+According to A¡ÄB = ©´(©´A¡Å©´B), we can relate noisy-AND to noisy-OR.
+In the noisy-OR case,we have:
+P(Y=true|x1,x2,...,xk)=1-¦°{i:xi=true}qi
+qi is the probability that the presence of the ith parent fails to cause the child to be true.
+In the noisy-AND case, we have:
+P(Y=true|x1,x2,...,xk)=1-¦°{i:xi=false}ri
+ri is the probability that the absence of the ith parent fails to cause the child to be false.
