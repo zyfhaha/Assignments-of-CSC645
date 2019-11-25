@@ -1,0 +1,101 @@
+Exercise 10.1
+
+1. A professor wants to know if students are getting enough sleep. Each day, the professor observes whether the students sleep in class, and whether they have red eyes. The professor has the following domain theory:
+(a) The prior probability of getting enough sleep, with no observations, is 0.7.
+(b) The probability of getting enough sleep on night t is 0.8 given that the student got enough sleep the previous night, and 0.3 if not.
+(c) The probability of having red eyes is 0.2 if the student got enough sleep, and 0.7 if not.
+(d) The probability of sleeping in class is 0.1 if the student got enough sleep, and 0.3 if not.
+Formulate this information as a dynamic Bayesian network (DBN) that the professor could use to filter or predict from a sequence of observations. Then reformulate it as a hidden Markov model that has only a single observation variable. Give the complete probability tables for the model.
+
+In this question, we define three variables in the DBN: St means whether the student gets enough sleep, and Rt means whether the student has red eyes, Ct means whether the student sleep in class.
+The CPT is:
+P(s0)=0.7
+P(st+1|st)=0.8
+P(st+1|©´st)=0.3
+P(rt|st)=0.2
+P(rt|©´st)=0.7
+P(ct|st)=0.1
+P(ct|©´st)=0.3
+
+To reformulate as an Hidden Markov Model with a single obsercation node, we combine 'having red eyes' and 'sleeping in class' into a 4-valued variable.
+Matrix T=
+©°       ©´
+  0.8 0.2
+  0.3 0.7
+©¸       ©¼
+
+Matrix O=
+©°               ©´
+  0.2 0.8 0.1 0.9
+  0.7 0.3 0.3 0.7
+©¸               ©¼
+
+2. For the DBN specified in Exercise 10.1 and for the evidence values
+e1 = not red eyes, not sleeping in class
+e2 = red eyes, not sleeping in class
+e3 = red eyes, sleeping in class
+perform the following computations:
+(a) State estimation: Compute P(EnoughSleept|e1:t) for each of t = 1,2,3.
+
+P(S0)=<0.7,0.3>
+P(S1)=¦²s0 P(S1|s0)*P(s0)
+=<0.8,0.2>*0.7+<0.3,0.7>*0.3
+=<0.65,0.35>
+
+P(S1|e1)=¦ÁP(e1|S1)P(S1)
+=¦Á<0.8*0.9,0.3*0.7>*<0.65,0.35>
+=¦Á<0.72,0.21>*<0.65,0.35>
+=<0.8643,0.1357>
+
+P(S2|e1)=¦²s1 P(S2|s1)P(s1|e1)
+=<0.7321,0.2679>
+
+P(S2|e1:2)=¦ÁP(e2|S2)P(S2|e1)
+=¦Á<0.2*0.9,0.7*0.7>*<0.7321,0.2679>
+=<0.5010,0.4990>
+
+P(S3|e1:2)=¦²s2 P(S3|s2)P(s2|e1:2)
+=<0.5505,0.4495>
+
+P(S3|e1:3)=¦ÁP(e3|S3)P(S3|e1:2)
+=¦Á<0.2*0.1,0.7*0.3>*<0.5505,0.4495>
+=<0.1045,0.8955>
+
+It seems that, as time goes on, student have a higher likelihood to be observed sleep deprived.
+
+(b) Smoothing: Compute P(EnoughSleept|e1:3) for each of t = 1, 2, 3.
+
+P(e3|S3)=<0.2*0.1,0.7*0.3>=<0.02,0.21>
+
+P(e3|S2)=¦²s3 P(e3|s3)P(s3|S2)
+=<0.02*0.8+0.21*0.2,0.02*0.3+0.21*0.7>
+=<0.0588,0.153>
+
+P(e2:3|S1)=¦²s2 P(e2|s2)P(e3|s2)P(s2|S1)
+=<0.0233,0.0556>
+
+P(S1|e1:3)=¦ÁP(S1|e1)P(e2:3|S1)
+=¦Á<0.8643,0.1357>*<0.0233,0.0556>
+=<0.7277,0.2723>
+
+P(S2|e1:3)=¦ÁP(S2|e1:2)P(e3|S1)
+=<0.2757,0.7243>
+
+P(S3|e1:3)=<0.1045,0.8955>
+
+(c) Compare the filtered and smoothed probabilities for t = 1 and t = 2.
+
+The smoothed analysis shows that the student start lack sleeping when t=2, it is one step earlier than the filtering analysis.
+
+3.Consider applying the variable elimination algorithm to the umbrella DBN unrolled for three slices, where the query is P(R3|u1, u2, u3).
+Show that the space complexity of the algorithm ¨C the size of the largest factor ¨C is the same, regardless of whether the rain variables are eliminated in forward or backward order.
+ 
+P(R3|u1:3)=¦ÁP(u3|R3,u1:2)P(R3|u1:2)
+=¦ÁP(u3|R3)P(R3|u1:2)
+=¦ÁP(u3|R3)¦²r2 P(R3|r2)P(r2|u1:2)
+
+P(R2|u1:2)
+=¦ÁP(u2|R2)P(R2|u1)
+=¦ÁP(u2|R2)¦²r1 P(R2|r1)P(r1|u1)
+
+No matter we do the variable elimination in forward or backward order, the operator we should calculate is a same number.

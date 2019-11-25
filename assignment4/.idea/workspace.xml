@@ -38,18 +38,6 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="Individual" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="assignment4" />
@@ -171,6 +159,13 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView />
+      </list>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -186,6 +181,7 @@
       <workItem from="1569467906075" duration="3563000" />
       <workItem from="1569523562901" duration="1873000" />
       <workItem from="1570050345399" duration="1053000" />
+      <workItem from="1573228755707" duration="97000" />
     </task>
     <servers />
   </component>
