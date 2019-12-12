@@ -41,7 +41,7 @@ class Individual:
             G.add_edge(int(self.map.borders[i].index1) + 1, int(self.map.borders[i].index2) + 1)
         pos = nx.spring_layout(G)
         colors = []
-        nodesp = list(G.node())
+        nodesp = list(G.nodes())
         for i in range(len(nodesp)):
             ppp = self.colors[nodesp[i] - 1]
             colors.append(ppp)
